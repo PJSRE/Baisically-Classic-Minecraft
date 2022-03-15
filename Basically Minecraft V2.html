@@ -5,7 +5,7 @@ see this on github!
 https://github.com/PJSRE/Baisically-Classic-Minecraft
 See PJSRE(AiFF)on GitHub!
 
-Tell me if you want this with minecraft like textures!
+Minecraft like textures!
 
 All remade!
 Credits are plased before the function.
@@ -27,7 +27,7 @@ Credits are plased before the function.
 			min-width: 300px;
 			height: calc(100vh - 220px);
 			position: absolute;
-			bottom: 120px;
+			bottom: 220px;
 			overflow-y: auto;
 			background-color: RGBA(0, 0, 0, 0);
 			justify-content: center;
@@ -36,7 +36,7 @@ Credits are plased before the function.
 		.world {
 			width: 198px;
 			height: auto;
-			border: 1px solid blue;
+			border: 10px solid blue;
 			font-size: 18px;
 			font-family: '', , ;
 			color: rgb(180, 180, 180);
@@ -54,7 +54,7 @@ Credits are plased before the function.
 		}
 		input[type=text] {
 			background-color: dark gray;
-			caret-color: white;
+		  /*caret-color: white;*/
 			border: 0px solid gray;
 			color: gray;
 			font-size: 24px;
@@ -172,7 +172,7 @@ var loadString =" "
 		void main(void) {
 			vTexture = aTexture;
 			vShadow = aShadow;
-			gl_Position = vec4(aVertex, 0.5, 1.0);
+			gl_Position = vec4(aVertex, 0, 0);
 		}
 	</script>
 	<script type="x-shader/fragment" id="2dFragmentShader">
@@ -217,7 +217,7 @@ var HomeTitleFontShade = 30
 var EditionName="Baisically Minecraft"
 var GameType="[Sandbloxa 3D]"
 var V =""
-var Buildedition ="V1"
+var Buildedition ="V2"
 var sky1 =0
 var sky2 =1
 var sky3 =1
@@ -1070,7 +1070,7 @@ var dbm =false
         
         	// Configurable and savable settings
         	let settings = {
-        		renderDistance: 32,
+        		renderDistance: 5,
         		fov: 70, // Field of view in degrees
         		mouseSense: 150 // Mouse sensitivity as a percentage of the default
         	}
@@ -2797,11 +2797,8 @@ var dbm =false
         
         	function isCave(x, y, z) {
         		// Generate a 3D rigid multifractal noise shell.
-        		// Then generate another one with different coordinates.
-        		// Overlay them on top of each other, and the overlapping parts should form a cave-like structure.
-        		// This is extremely slow, and requires generating 2 noise values for every single block in the world.
-        		// TODO: replace with a crawler system of some sort, that will never rely on a head position in un-generated chunks.
-        		let smooth = 0.02
+        		
+        		let smooth = 0.01
         		let caveSize = 0.01
         		let cave1 = Math.abs(0.5 - caveNoise(x * smooth, y * smooth, z * smooth)) < caveSize
         		let cave2 = Math.abs(0.5 - caveNoise(y * smooth, z * smooth, x * smooth)) < caveSize
@@ -2852,7 +2849,7 @@ var dbm =false
         		return 0
         	}
         	let getShadows = {
-        		shade: [ 1, 0.85, 0.7, 0.6, 0.3 ],
+        		shade: [ 0, 0, 0.7, 0.6, 0.3 ],
         		ret: [],
         		blocks: [],
         		top: function(x, y, z, block) { // Actually the bottom... How did these get flipped?
@@ -4493,19 +4490,20 @@ Button.add(width / 2, 3750, 300, 40, "Save Code", "pause", r => {
         		// Comingsoon menu buttons
         		Button.add(width / 2, 395, width / 1, 1150, ""+"WASD to move, arrow keys to look around. L for spectator.", "comingsoon menu", r => changeScene(previousScreen))
         
-        		// Multiplayer buttons
-        		Button.add(width / 2, 395, width / 3, 40, "¯\\_(ツ)_/¯", "multiplayer menu", r => changeScene("main menu"))
+        		//extra
+        		//Button.add(width / 2, 395, width / 3, 40, "", "multiplayer menu", r => changeScene("main menu"))
         
         		// Settings Sliders
-        		Slider.add(width/2, 245, width / 3, 50, "options", "Render", 1, 100, "renderDistance", val => settings.renderDistance = Math.round(val))
-        		Slider.add(width/2, 305, width / 3, 50, "options", "FOV", 30, 110, "fov", val => {
+        		text("...", 300 ,200, 0, 0)
+        		Slider.add(300, 210, 30, 50, "options", "Render", 1, 5, "renderDistance", val => settings.renderDistance = Math.round(val))
+        		Slider.add(width/2, 150, 30, 50, "options", "FOV", 0, 140, "fov", val => {
         			p.FOV(val)
         			if (world) {
         				p.setDirection()
         				world.render()
         			}
         		})
-        		Slider.add(width/2, 365, width / 3, 50, "options", "Sensitivety", 30, 400, "mouseSense", val => settings.mouseSense = val)
+        		//Slider.add(width/2, 365, width / 3, 50, "options", "Sensitivety", 30, 400, "mouseSense", val => settings.mouseSense = val)
         	}
         	function initTextures() {
         		let textureSize = 256
@@ -4524,8 +4522,8 @@ Button.add(width / 2, 3750, 300, 40, "Save Code", "pause", r => {
         			texturePixels[offset + 3] = a !== undefined ? a : 255
         		}
         		getPixels = function(str) {
-        			// var w = parseInt(str.substr(0, 2), 36)
-        			// var h = parseInt(str.substr(2, 2), 36)
+        			 var w = parseInt(str.substr(0, 2), 36)
+        			 var h = parseInt(str.substr(2, 2), 36)
         			var colors = []
         			var pixels = []
         			var dCount = 0
