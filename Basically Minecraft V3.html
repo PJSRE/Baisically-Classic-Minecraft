@@ -4495,7 +4495,7 @@ Button.add(width / 2, 3750, 300, 40, "Save Code", "pause", r => {
         
         		// Settings Sliders
         		text("...", 300 ,200, 0, 0)
-        		Slider.add(300, 210, 30, 50, "options", "Render", 1, 5, "renderDistance", val => settings.renderDistance = Math.round(val))
+        		Slider.add(685, 210, 30, 50, "options", "Render", 1, 5, "renderDistance", val => settings.renderDistance = Math.round(val))
         		Slider.add(width/2, 150, 30, 50, "options", "FOV", 0, 140, "fov", val => {
         			p.FOV(val)
         			if (world) {
